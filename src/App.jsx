@@ -8,20 +8,26 @@ import useLocation from "./components/hooks/useLocation";
 import './App.css';
 import GifGallery from './components/GifGallery';
 
+
+
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const residentsPerPage = 8;
-  
+
   const { 
     location, 
-    suggestions,
+    suggestions, 
     loading, 
     error,
     fetchLocation,
-    searchLocations 
+    searchLocations,
+    getRandomLocation 
   } = useLocation();
-
+  
+  useEffect(() => {
+    getRandomLocation(); // Usamos la función del hook
+  }, [getRandomLocation]);
   
   useEffect(() => {
     const randomId = Math.floor(Math.random() * 126) + 1;

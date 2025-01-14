@@ -204,6 +204,18 @@ body {
   margin-bottom: 0.2rem;
 }
 
+@media (max-width: 1024px) {
+  .residents {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .location__grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .resident-card {
     flex-direction: column;
@@ -218,9 +230,7 @@ body {
   .resident-card__content {
     background: linear-gradient(to top, var(--card-bg) 80%, transparent);
   }
-}
 
-@media (max-width: 768px) {
   .resident-card__name {
     font-size: 1.5rem;
   }
@@ -230,6 +240,65 @@ body {
   }
 }
 
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+  
+  .header__title {
+    font-size: 1.5rem;
+  }
+  
+  .resident-card__image {
+    height: 200px;
+  }
+  
+  .search__input {
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
+  
+  .location__title {
+    font-size: 1.5rem;
+  }
+  
+  .location__info-item {
+    padding: 0.5rem;
+  }
+  
+  .gif-gallery__title {
+    font-size: 1.5rem;
+  }
+  
+  .gif-card__image {
+    height: 150px;
+  }
+  
+  .pagination__button {
+    padding: 5px 15px;
+  }
+  
+  .error {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .error__icon {
+    font-size: 1.25rem;
+  }
+  
+  .error__title {
+    font-size: 1rem;
+  }
+  
+  .error__message {
+    font-size: 0.875rem;
+  }
+  
+  .search__error {
+    font-size: 0.75rem;
+  }
+}
 
 .status-indicator {
   display: flex;
@@ -467,3 +536,69 @@ body {
   background-color: var(--rick-green);
   border-radius: 20px;
 }
+
+.scroll-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(151, 206, 76, 0.3);
+  border: 2px solid var(--rick-green);
+  color: white;
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.scroll-button:hover {
+  background: rgba(151, 206, 76, 0.6);
+}
+
+.scroll-button.left {
+  left: 1rem;
+}
+
+.scroll-button.right {
+  right: 1rem;
+}
+
+.gifs-container {
+  position: relative;
+  padding: 0 3rem;
+}
+
+.error {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 2px solid #ff4444;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.error__icon {
+  font-size: 1.5rem;
+}
+
+.error__title {
+  color: #ff4444;
+  margin: 0 0 0.5rem 0;
+}
+
+.error__message {
+  margin: 0;
+  color: #fff;
+}
+
+.search__error {
+  color: #ff4444;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.search__input--error {
+    border-color: #ff4444;
+  }

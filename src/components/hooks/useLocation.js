@@ -11,7 +11,11 @@ const useLocation = () => {
       setLoading(true);
       setError(null);
       const response = await fetch(`https://rickandmortyapi.com/api/location/${locationId}`);
-      if (!response.ok) throw new Error('Location not found');
+      
+      if (!response.ok) {
+        throw new Error('Error al cargar la ubicación');
+      }
+
       const data = await response.json();
       setLocation(data);
     } catch (error) {
@@ -24,14 +28,45 @@ const useLocation = () => {
 
   const searchLocations = useCallback(async (query) => {
     try {
+      if (!query.trim()) {
+        setSuggestions([]);
+        return;
+      }
+
       const response = await fetch(
-        `https://rickandmortyapi.com/api/location/?name=${query}`
+        `https://rickandmortyapi.com/api/location/?name=${encodeURIComponent(query)}`
       );
+
+      if (!response.ok) {
+        throw new Error('Error en la búsqueda');
+      }
+
       const data = await response.json();
       setSuggestions(data.results || []);
     } catch (error) {
-      console.error('Error searching locations:', error);
       setSuggestions([]);
+      console.error('Error searching locations:', error);
+    }
+  }, []);
+
+  const getRandomLocation = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const randomId = Math.floor(Math.random() * 126) + 1;
+      const response = await fetch(`https://rickandmortyapi.com/api/location/${randomId}`);
+      
+      if (!response.ok) {
+        throw new Error('Error al cargar la ubicación aleatoria');
+      }
+
+      const data = await response.json();
+      setLocation(data);
+    } catch (error) {
+      setError(error.message);
+      setLocation(null);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -41,7 +76,8 @@ const useLocation = () => {
     loading,
     error,
     fetchLocation,
-    searchLocations
+    searchLocations,
+    getRandomLocation
   };
 };
 

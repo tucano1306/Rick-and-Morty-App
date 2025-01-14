@@ -1,28 +1,36 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react'; // Agregamos useState
 import PropTypes from 'prop-types';
 
-const SearchLocation = ({ searchTerm, setSearchTerm, suggestions, onLocationSelect }) => {
-  const [error, setError] = useState('');
+function SearchLocation({ searchTerm, setSearchTerm, suggestions, onLocationSelect }) {
+  const searchInputRef = useRef(null);
+  const [inputError, setInputError] = useState(''); // Definimos el estado para el error
 
-  const handleSearch = (value) => {
+  const handleInputChange = (e) => {
+    const value = e.target.value;
     setSearchTerm(value);
-    if (value.length === 0) {
-      setError('');
-    } else if (value.length < 2) {
-      setError('Type at least 2 characters');
+    
+    // Validación de entrada
+    if (value.length === 1) {
+      setInputError('Ingresa al menos 2 caracteres para buscar');
+    } else {
+      setInputError('');
     }
   };
 
   return (
-    <div className="search-container">
+    <div className="search">
       <input
+        ref={searchInputRef}
         type="text"
         value={searchTerm}
-        onChange={(e) => handleSearch(e.target.value)}
+        onChange={handleInputChange}
+        className={`search__input ${inputError ? 'search__input--error' : ''}`}
         placeholder="Search location..."
-        className="search__input"
+        aria-label="Search locations"
       />
-      {error && <span className="search__error">{error}</span>}
+      {inputError && (
+        <div className="search__error">{inputError}</div>
+      )}
       {suggestions.length > 0 && searchTerm && (
         <div className="search__suggestions">
           {suggestions.map((location) => (
@@ -30,6 +38,8 @@ const SearchLocation = ({ searchTerm, setSearchTerm, suggestions, onLocationSele
               key={location.id}
               onClick={() => onLocationSelect(location.id)}
               className="search__suggestion-item"
+              role="button"
+              tabIndex={0}
             >
               {location.name}
             </div>
@@ -38,7 +48,7 @@ const SearchLocation = ({ searchTerm, setSearchTerm, suggestions, onLocationSele
       )}
     </div>
   );
-};
+}
 
 SearchLocation.propTypes = {
   searchTerm: PropTypes.string.isRequired,

@@ -1,38 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useResidents } from './hooks/useResidents.js';
 import PropTypes from 'prop-types';
 
-const ResidentList = ({ residents }) => {
-  const [residentData, setResidentData] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchResidents = async () => {
-      setLoading(true);
-      try {
-        if (!residents || residents.length === 0) {
-          setResidentData([]);
-          return;
-        }
-        
-        const data = await Promise.all(
-          residents.map(async (url) => {
-            const response = await fetch(url);
-            return response.json();
-          })
-        );
-        setResidentData(data);
-      } catch (error) {
-        console.error('Error fetching residents:', error);
-        setResidentData([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchResidents();
-  }, [residents]); 
+function ResidentList({ residents }) {
+  const { residents: residentData, loading, error } = useResidents(residents);
 
   if (loading) return <div className="loading">Loading residents...</div>;
+  
+  if (error) return <div className="error">{error}</div>;
 
   return (
     <div className="residents">
@@ -68,7 +42,7 @@ const ResidentList = ({ residents }) => {
       )}
     </div>
   );
-};
+}
 
 ResidentList.propTypes = {
   residents: PropTypes.arrayOf(PropTypes.string).isRequired
