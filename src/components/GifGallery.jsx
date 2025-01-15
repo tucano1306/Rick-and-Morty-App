@@ -1,9 +1,5 @@
 // GifGallery.jsx
-import { useRef } from 'react';
-
 function GifGallery() {
-  const scrollContainerRef = useRef(null);
-
   const gifs = [
     '/background/200.webp',
     '/background/201.webp',
@@ -11,34 +7,9 @@ function GifGallery() {
     '/background/203.webp'
   ];
 
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: -300,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: 300,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
     <div className="gifs-container">
-      <button 
-        onClick={scrollLeft} 
-        className="scroll-button left"
-        aria-label="Scroll left"
-      >
-        &lt;
-      </button>
-      <div className="gifs-wrapper" ref={scrollContainerRef}>
+      <div className="gifs-wrapper">
         {gifs.map((gif, index) => (
           <div key={index} className="gif-item">
             <img 
@@ -46,17 +17,15 @@ function GifGallery() {
               alt={`Rick and Morty Gif ${index + 1}`} 
               className="gif-image"
               loading="lazy"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
+              }}
             />
           </div>
         ))}
       </div>
-      <button 
-        onClick={scrollRight} 
-        className="scroll-button right"
-        aria-label="Scroll right"
-      >
-        &gt;
-      </button>
     </div>
   );
 }

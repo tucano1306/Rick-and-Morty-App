@@ -1,49 +1,38 @@
 import { useState, useEffect } from 'react';
 import LocationInfo from './components/LocationInfo';
 import ResidentList from './components/ResidentList';
-import SearchLocation from './components/SearchLocation';
 import ErrorMessage from './components/ErrorMessage';
-import Pagination from './components/Pagination';
-import useLocation from "./components/hooks/useLocation";
-import './App.css';
+import LocationIdSearch from './components/LocationIdSearch';
+import LocationSearch from './components/LocationSearch';
+import { useLocation } from './components/hooks/useLocation';
 import GifGallery from './components/GifGallery';
-
+import Pagination from './components/Pagination';
+import './App.css';
 
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const residentsPerPage = 8;
 
-  const { 
-    location, 
-    suggestions, 
-    loading, 
+  const {
+    location,
+    loading,
     error,
-    fetchLocation,
-    searchLocations,
-    getRandomLocation 
+    fetchLocation
   } = useLocation();
-  
-  useEffect(() => {
-    getRandomLocation(); // Usamos la función del hook
-  }, [getRandomLocation]);
-  
+
   useEffect(() => {
     const randomId = Math.floor(Math.random() * 126) + 1;
     fetchLocation(randomId);
-  }, [fetchLocation]); 
+  }, [fetchLocation]);
 
-  
-  useEffect(() => {
-    if (searchTerm.length >= 2) {
-      searchLocations(searchTerm);
-    }
-  }, [searchTerm, searchLocations]); 
+  const handleIdSearch = (id) => {
+    fetchLocation(id);
+    setCurrentPage(1);
+  };
 
-  const handleLocationSelect = async (locationId) => {
-    setSearchTerm('');
-    await fetchLocation(locationId);
+  const handleLocationSearch = async (locationId) => {
+    fetchLocation(locationId);
     setCurrentPage(1);
   };
 
@@ -55,41 +44,37 @@ function App() {
   ) || [];
 
   return (
-    <>
-      <div className="container">
-        <header className="header">
-          <h1 className="header__title">Rick and Morty Location Explorer</h1>
-        </header>
-
-        <SearchLocation
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          suggestions={suggestions}
-          onLocationSelect={handleLocationSelect}
-        />
-
-        {error && <ErrorMessage message={error} />}
-        
-        {loading ? (
-          <div className="loading">Cargando...</div>
-        ) : (
-          location && (
-            <>
-              <LocationInfo location={location} />
-              <ResidentList residents={currentResidents} />
-              {location.residents?.length > residentsPerPage && (
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={Math.ceil(location.residents.length / residentsPerPage)}
-                  onPageChange={setCurrentPage}
-                />
-              )}
-            </>
-          )
-        )}
+    <div className="container">
+      <header className="header">
+        <h1 className="header__title">Rick and Morty Location Explorer</h1>
+      </header>
+      
+      <div className="search-container">
+        <LocationIdSearch onSearch={handleIdSearch} />
+        <LocationSearch onLocationSelect={handleLocationSearch} />
       </div>
+
+      {error && <ErrorMessage message={error} />}
+      
+      {loading ? (
+        <div className="loading">Cargando...</div>
+      ) : (
+        location && (
+          <>
+            <LocationInfo location={location} />
+            <ResidentList residents={currentResidents} />
+            {location.residents?.length > residentsPerPage && (
+              <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(location.residents.length / residentsPerPage)}
+                onPageChange={setCurrentPage}
+              />
+            )}
+          </>
+        )
+      )}
       <GifGallery />
-    </>
+    </div>
   );
 }
 

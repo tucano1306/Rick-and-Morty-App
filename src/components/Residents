@@ -1,0 +1,57 @@
+import React from 'react';
+import { useResidents } from '../hooks/useResidents';
+
+const Residents = ({ location }) => {
+  const { residents, loading, error } = useResidents(location?.residents || []);
+
+  if (loading) {
+    return (
+      <div className="mt-6 text-center">
+        <p>Cargando residentes...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="mt-6 text-center text-red-500">
+        <p>Error al cargar residentes: {error}</p>
+      </div>
+    );
+  }
+
+  if (!residents.length) {
+    return (
+      <div className="mt-6 text-center">
+        <p>No hay residentes en esta ubicación</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-6">
+      <h3 className="text-2xl font-bold mb-4">Residentes ({residents.length})</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {residents.map((resident) => (
+          <div 
+            key={resident.id} 
+            className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center"
+          >
+            <img 
+              src={resident.image} 
+              alt={resident.name} 
+              className="w-32 h-32 rounded-full object-cover mb-4"
+            />
+            <h4 className="font-semibold text-lg text-center">{resident.name}</h4>
+            <div className="text-sm text-gray-600 text-center">
+              <p>Especie: {resident.species}</p>
+              <p>Estado: {resident.status}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Residents;

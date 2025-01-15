@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-const useLocation = () => {
+export const useLocation = () => {
   const [location, setLocation] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);

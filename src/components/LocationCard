@@ -1,0 +1,27 @@
+import React from 'react';
+
+const LocationCard = ({ location }) => {
+  if (!location) return null;
+
+  return (
+    <div className="bg-white shadow-md rounded-lg p-6 mt-6">
+      <h2 className="text-2xl font-bold mb-4">{location.name}</h2>
+      <div className="grid grid-cols-3 gap-4">
+        <div>
+          <p className="font-semibold">Tipo:</p>
+          <p>{location.type}</p>
+        </div>
+        <div>
+          <p className="font-semibold">Dimensión:</p>
+          <p>{location.dimension}</p>
+        </div>
+        <div>
+          <p className="font-semibold">Número de Residentes:</p>
+          <p>{location.residents.length}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LocationCard;

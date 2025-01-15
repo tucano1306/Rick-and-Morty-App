@@ -35,11 +35,11 @@ body {
 
 .container {
   background: rgba(0, 20, 20, 0.4);
-  width: 80%; 
-  max-width: 800px; 
-  min-height: auto;
-  margin: 2rem auto;
-  padding: 1.5rem; 
+  width: 500%; 
+  max-width: 550px; 
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 20px; 
   border-radius: 20px;
   backdrop-filter: blur(5px);
   border: 2px solid rgba(151, 206, 76, 0.3);
@@ -106,34 +106,113 @@ body {
 
 
 .location {
-  background: rgba(0, 0, 0, 0.7);
-  border: 2px solid var(--rick-green);
+  background: rgba(0, 20, 20, 0.7);
   border-radius: 15px;
-  padding: 20px;
-  margin-bottom: 30px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(5px);
+  border: 2px solid var(--rick-green);
 }
 
 .location__title {
+  font-size: 2.5rem;
   color: var(--rick-green);
-  font-size: 2rem;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 10px rgba(151, 206, 76, 0.5);
 }
 
 .location__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-.location__info-item {
-  padding: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  text-align: center;
 }
 
 .location__info-label {
-  color: var(--text-secondary);
+  font-size: 1.5rem;
+  color: white;
   margin-bottom: 0.5rem;
 }
+
+.location__info-value {
+  font-size: 1.25rem;
+  color: var(--rick-green);
+}
+
+.location-search {
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+.location-search__container {
+  display: flex;
+  gap: 1rem;
+}
+
+.location-search__input {
+  flex: 1;
+  padding: 1rem;
+  border: 2px solid var(--rick-green);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.location-search__button {
+  padding: 0 2rem;
+  background: var(--rick-green);
+  border: none;
+  border-radius: 8px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.location-search__input--error {
+  border-color: #ff4444;
+}
+
+.location-search__error-icon {
+  font-size: 1.2rem;
+}
+
+
+.location-search__button:hover {
+  background: #a8e65c;
+  transform: translateY(-2px);
+}
+
+.location-search__error {
+  margin-top: 0.5rem;
+  color: #ff4444;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  background: rgba(255, 68, 68, 0.1);
+  border-radius: 4px;
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .location__grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .location__title {
+    font-size: 2rem;
+  }
+}
+
+
 
 /* Residents Grid */
 .residents {
@@ -486,30 +565,28 @@ body {
 
 .gifs-container {
   width: 100%;
-  background: rgba(0, 20, 20, 0.4);
-  padding: 2rem;
-  margin-top: 2rem;
-  backdrop-filter: blur(5px);
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 20px;
+  overflow: hidden;
 }
 
 .gifs-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   overflow-x: auto;
   gap: 1rem;
   padding: 1rem;
+  -webkit-overflow-scrolling: touch; /* Para mejor scroll en iOS */
   scrollbar-width: thin;
-  scrollbar-color: var(--rick-green) transparent;
 }
 
 .gif-item {
   flex: 0 0 auto;
-  width: 300px;
+  width: 300px; /* Ancho fijo para las tarjetas */
+  max-width: 90vw; /* Para evitar que se salga en móviles */
   border: 2px solid var(--rick-green);
   border-radius: 10px;
   overflow: hidden;
-  transition: transform 0.3s ease;
 }
 
 .gif-item:hover {
@@ -525,16 +602,17 @@ body {
 }
 
 .gifs-wrapper::-webkit-scrollbar {
-  height: 8px;
+  height: 6px;
 }
 
 .gifs-wrapper::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 }
 
 .gifs-wrapper::-webkit-scrollbar-thumb {
-  background-color: var(--rick-green);
-  border-radius: 20px;
+  background: var(--rick-green);
+  border-radius: 3px;
 }
 
 .scroll-button {
@@ -567,6 +645,29 @@ body {
   position: relative;
   padding: 0 3rem;
 }
+
+@media (max-width: 768px) {
+  .container,
+  .gifs-container {
+    padding: 10px;
+  }
+
+  .gif-item {
+    width: 250px; /* Reducimos el tamaño en tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .gif-item {
+    width: 200px; 
+  }
+  
+  .gifs-wrapper {
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+}
+
 
 .error {
   background-color: rgba(255, 0, 0, 0.1);
