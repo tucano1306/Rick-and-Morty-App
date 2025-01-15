@@ -1,4 +1,3 @@
-// components/LocationIdSearch.jsx
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
@@ -7,10 +6,10 @@ function LocationIdSearch({ onSearch }) {
   const [error, setError] = useState('');
 
   const validateInput = (value) => {
-    // Convertimos el valor a número
+    
     const id = parseInt(value);
     
-    // Validaciones
+
     if (value === '') {
       setError('Por favor ingresa un ID');
       return false;
@@ -40,7 +39,7 @@ function LocationIdSearch({ onSearch }) {
   const handleChange = (e) => {
     const value = e.target.value;
     setLocationId(value);
-    validateInput(value); // Validamos mientras el usuario escribe
+    validateInput(value); 
   };
 
   return (

@@ -1,15 +1,15 @@
-import { useRef, useState } from 'react'; // Agregamos useState
+import { useRef, useState } from 'react'; 
 import PropTypes from 'prop-types';
 
 function SearchLocation({ searchTerm, setSearchTerm, suggestions, onLocationSelect }) {
   const searchInputRef = useRef(null);
-  const [inputError, setInputError] = useState(''); // Definimos el estado para el error
+  const [inputError, setInputError] = useState(''); 
 
   const handleInputChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
     
-    // Validación de entrada
+    
     if (value.length === 1) {
       setInputError('Ingresa al menos 2 caracteres para buscar');
     } else {

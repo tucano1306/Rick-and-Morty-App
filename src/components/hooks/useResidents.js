@@ -1,4 +1,3 @@
-// src/hooks/useResidents.js
 import { useState, useCallback, useEffect } from 'react';
 
 export const useResidents = (residentUrls = []) => {

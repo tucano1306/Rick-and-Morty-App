@@ -1,4 +1,3 @@
-// GifGallery.jsx
 function GifGallery() {
   const gifs = [
     '/background/200.webp',

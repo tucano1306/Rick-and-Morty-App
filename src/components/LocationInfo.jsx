@@ -1,8 +1,7 @@
-// LocationInfo.jsx
 import PropTypes from 'prop-types';
 
 function LocationInfo({ location }) {
-  // Agregamos una validación para cuando location es undefined
+  
   if (!location) return null;
 
   return (

@@ -200,7 +200,7 @@ body {
 
 
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .location__grid {
     grid-template-columns: 1fr;
@@ -214,7 +214,7 @@ body {
 
 
 
-/* Residents Grid */
+
 .residents {
   display: flex;
   flex-direction: column;
@@ -263,23 +263,23 @@ body {
 .resident-card__name {
   font-size: 1.8rem;
   color: var(--rick-green);
-  line-height: 1.2; /* Mejoramos el espaciado entre líneas */
+  line-height: 1.2; 
   margin-bottom: 0.5rem;
-  word-wrap: break-word; /* Evitamos que los nombres largos se corten */
+  word-wrap: break-word; 
   word-break: break-word;
 }
 
 .resident-card__info {
   display: flex;
-  flex-direction: column; /* Cambiamos a columna para mejor legibilidad */
+  flex-direction: column; 
   gap: 0.4rem;
   font-size: 1rem;
-  line-height: 1.4; /* Mejoramos el espaciado entre líneas */
+  line-height: 1.4; 
 }
 .resident-card__label {
   color: var(--text-secondary);
   font-size: 0.9rem;
-  display: block; /* Ponemos las etiquetas en su propia línea */
+  display: block;
   margin-bottom: 0.2rem;
 }
 
@@ -516,7 +516,7 @@ body {
   }
 }
 
-/* Estilos para la galería de GIFs */
+
 .gif-gallery {
   margin-top: 2rem;
   padding: 1rem;
@@ -556,7 +556,7 @@ body {
   display: block;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .gif-gallery__container {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -576,14 +576,14 @@ body {
   overflow-x: auto;
   gap: 1rem;
   padding: 1rem;
-  -webkit-overflow-scrolling: touch; /* Para mejor scroll en iOS */
+  -webkit-overflow-scrolling: touch; 
   scrollbar-width: thin;
 }
 
 .gif-item {
   flex: 0 0 auto;
-  width: 300px; /* Ancho fijo para las tarjetas */
-  max-width: 90vw; /* Para evitar que se salga en móviles */
+  width: 300px; 
+  max-width: 90vw; 
   border: 2px solid var(--rick-green);
   border-radius: 10px;
   overflow: hidden;
@@ -653,7 +653,7 @@ body {
   }
 
   .gif-item {
-    width: 250px; /* Reducimos el tamaño en tablets */
+    width: 250px; 
   }
 }
 

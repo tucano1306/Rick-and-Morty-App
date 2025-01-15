@@ -107,7 +107,6 @@ button:focus-visible {
   display: block;
 }
 
-/* Estilos para la barra de desplazamiento */
 .gifs-wrapper::-webkit-scrollbar {
   height: 8px;
 }
