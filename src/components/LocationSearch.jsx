@@ -26,6 +26,7 @@ function LocationSearch({ onLocationSelect }) {
       setLoading(false);
     }
   };
+  
 
   const handleChange = async (e) => {
     const value = e.target.value;
@@ -48,7 +49,7 @@ function LocationSearch({ onLocationSelect }) {
         placeholder="Type a location name..."
         className="location-search__input"
       />
-      
+
       {loading && (
         <div className="location-search__loading">Searching locations...</div>
       )}

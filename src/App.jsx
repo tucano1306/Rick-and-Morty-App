@@ -35,6 +35,7 @@ function App() {
     fetchLocation(locationId);
     setCurrentPage(1);
   };
+  
 
   const indexOfLastResident = currentPage * residentsPerPage;
   const indexOfFirstResident = indexOfLastResident - residentsPerPage;
