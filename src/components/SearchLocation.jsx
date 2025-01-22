@@ -1,6 +1,34 @@
 import { useRef, useState } from 'react'; 
 import PropTypes from 'prop-types';
 
+
+function SearchLocation({ onSearch }) {
+
+
+  return (
+    <div className="search-container">
+      <input
+        type="text"
+        placeholder="Type a location ID..."
+        className="search-input"
+        value={locationId}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        placeholder="Type a location name..."
+        className="search-input"
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
+      <button className="search-button" onClick={handleSearch}>
+        Search
+      </button>
+      {error && <div className="search-error">{error}</div>}
+    </div>
+  );
+}
+
 function SearchLocation({ searchTerm, setSearchTerm, suggestions, onLocationSelect }) {
   const searchInputRef = useRef(null);
   const [inputError, setInputError] = useState(''); 

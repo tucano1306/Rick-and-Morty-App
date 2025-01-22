@@ -9,7 +9,6 @@ import GifGallery from './components/GifGallery';
 import Pagination from './components/Pagination';
 import './App.css';
 
-
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const residentsPerPage = 8;
@@ -18,7 +17,7 @@ function App() {
     location,
     loading,
     error,
-    fetchLocation
+    fetchLocation,
   } = useLocation();
 
   useEffect(() => {
@@ -35,7 +34,6 @@ function App() {
     fetchLocation(locationId);
     setCurrentPage(1);
   };
-  
 
   const indexOfLastResident = currentPage * residentsPerPage;
   const indexOfFirstResident = indexOfLastResident - residentsPerPage;
@@ -45,36 +43,38 @@ function App() {
   ) || [];
 
   return (
-    <div className="container">
-      <header className="header">
-        <h1 className="header__title">Rick and Morty Location Explorer</h1>
-      </header>
-      
-      <div className="search-container">
-        <LocationIdSearch onSearch={handleIdSearch} />
-        <LocationSearch onLocationSelect={handleLocationSearch} />
-      </div>
+    <div className="main-wrapper"> 
+      <div className="container">
+        <header className="header">
+          <h1 className="header__title">Rick and Morty Location Explorer</h1>
+        </header>
 
-      {error && <ErrorMessage message={error} />}
-      
-      {loading ? (
-        <div className="loading">Cargando...</div>
-      ) : (
-        location && (
-          <>
-            <LocationInfo location={location} />
-            <ResidentList residents={currentResidents} />
-            {location.residents?.length > residentsPerPage && (
-              <Pagination
-                currentPage={currentPage}
-                totalPages={Math.ceil(location.residents.length / residentsPerPage)}
-                onPageChange={setCurrentPage}
-              />
-            )}
-          </>
-        )
-      )}
-      <GifGallery />
+        <div className="search-container">
+          <LocationIdSearch onSearch={handleIdSearch} />
+          <LocationSearch onLocationSelect={handleLocationSearch} />
+        </div>
+
+        {error && <ErrorMessage message={error} />}
+
+        {loading ? (
+          <div className="loading">Cargando...</div>
+        ) : (
+          location && (
+            <>
+              <LocationInfo location={location} />
+              <ResidentList residents={currentResidents} />
+              {location.residents?.length > residentsPerPage && (
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={Math.ceil(location.residents.length / residentsPerPage)}
+                  onPageChange={setCurrentPage}
+                />
+              )}
+            </>
+          )
+        )}
+        <GifGallery />
+      </div>
     </div>
   );
 }

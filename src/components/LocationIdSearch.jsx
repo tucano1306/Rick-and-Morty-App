@@ -32,7 +32,7 @@ function LocationIdSearch({ onSearch }) {
     
     if (validateInput(locationId)) {
       onSearch(parseInt(locationId));
-      setLocationId(''); // Limpiamos el input después de una búsqueda exitosa
+      setLocationId(''); 
     }
   };
 
